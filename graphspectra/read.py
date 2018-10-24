@@ -1,5 +1,7 @@
+import numpy as np
+
 from networkx import Graph, DiGraph
-from networkx.convert_matrix import to_numpy_matrix
+from networkx.convert_matrix import to_numpy_matrix, to_scipy_sparse_matrix
 
 
 def read_graph(filepath, directed=True, attr_names=None):
@@ -25,5 +27,9 @@ def read_graph(filepath, directed=True, attr_names=None):
 
 # Paper thin wrapper around networkx.convert_matrix.to_numpy_matrix. Saves
 # ya the trouble of reimporting it.
-get_adjacency_matrix = to_numpy_matrix
+def get_adjacency_matrix(graph, as_sparse=False, **kwargs):
+    if as_sparse:
+        return np.asmatrix(to_scipy_sparse_matrix(graph, **kwargs))
+    else:
+        return to_numpy_matrix(graph, **kwargs)
     

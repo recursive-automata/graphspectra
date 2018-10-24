@@ -5,5 +5,5 @@ setup(
     version='0.0.0',
     packages=['graphspectra',],
     license='MIT',
-    long_description=open('README.txt').read(),
+    long_description=open('README.md').read(),
 )
