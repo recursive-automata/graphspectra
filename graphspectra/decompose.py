@@ -1,4 +1,5 @@
 import numpy as np
+import scipy.linalg as la
 
 
 def _reorder_eigen_solution(eigen_soln, key=None):
@@ -11,18 +12,19 @@ def _reorder_eigen_solution(eigen_soln, key=None):
     return values, vectors
     
 
-def calculate_symmetric_eigensystem(symmetric_matrix):
-    """ Calculate eigenvalues and eigenvectors of a symmetric
-    matrix. Returns the eigenvalues in ascending order.
+def calculate_symmetric_eigensystem(symmetric_matrix, k=None):
+    """ Calculate the smallest eigenvalues and eigenvectors of
+    a symmetric matrix.
+    
+    Args:
+      symmetric_matrix: a symmetric numpy matrix
+      k: an integer, how many eigenvalues and
+        eigenvectors to calculate.
+      
+    Returns: values, vectors. Eigenvalues are in ascending order.
     """
     # symmetric => use `eigh`
-    eigen_soln = np.linalg.eigh(symmetric_matrix)
-    return _reorder_eigen_solution(eigen_soln)
-
-
-def calculate_eigensystem(matrix):
-    """ Calculate eigenvalues and eigenvectors of a matrix.
-    Returns the eigenvalues in ascending order of magnitude.
-    """
-    eigen_soln = np.linalg.eig(matrix)
+    k = k or symmetric_matrix.shape[0]
+    k -= 1
+    eigen_soln = la.eigh(symmetric_matrix, eigvals=(0, k))
     return _reorder_eigen_solution(eigen_soln, np.abs)
