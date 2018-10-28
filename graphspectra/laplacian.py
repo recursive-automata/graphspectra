@@ -14,13 +14,22 @@ def compute_out_degrees(adjacency_matrix):
     return np.apply_along_axis(sum_col, 1, adjacency_matrix)
 
 
-def compute_undirected_normalized_laplacian(adjacency_matrix):
+def compute_laplacian(adjacency_matrix):
     """ TODO
     """
     # undirected graph => out-degree = in-degree = degree
     degrees = compute_out_degrees(adjacency_matrix)
     deg = np.diag(degrees)
-    lap = deg -adjacency_matrix
+    return deg - adjacency_matrix
+
+
+def compute_normalized_laplacian(adjacency_matrix):
+    """ TODO
+    """
+    # undirected graph => out-degree = in-degree = degree
+    degrees = compute_out_degrees(adjacency_matrix)
+    deg = np.diag(degrees)
+    lap = deg - adjacency_matrix
     deg_sqrt_inv = np.diag(degrees ** -0.5)
     return deg_sqrt_inv * lap * deg_sqrt_inv
 
