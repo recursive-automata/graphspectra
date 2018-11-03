@@ -8,12 +8,17 @@ A set of tools for using spectral graph theory to analyze data.
 import networkx as nx
 import graphspectra as gs
 
-## read from file
+## read a graph from file
 ## https://snap.stanford.edu/data/ego-Facebook.html
 # data_file = 'facebook_combined.txt'
 # graph = gs.read_graph(data_file, directed = False)
 
-## or generate a random graph
+## make a graph out of data
+# import numpy as np
+# X = np.random.random((1000, 3)) - 0.5
+# graph = gs.make_kernel_graph(X, metric='rbf')
+
+## generate a random graph
 graph = nx.connected_watts_strogatz_graph(1000, 25, 0.05)
 
 adj = nx.to_numpy_matrix(graph)
