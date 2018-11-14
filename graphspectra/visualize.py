@@ -15,10 +15,9 @@ def plot_graph(coordinates, adjacency_matrix, title = '',
         which_edges = np.asarray(np.argwhere(edges))
         line_coords = [[(x[a], y[a]),
                         (x[b], y[b])]
-                       for (a, b) in which_edges
-                       if a < b]
+                       for (a, b) in which_edges]
         
-        lines = LineCollection(line_coords, linewidths=0.01,
+        lines = LineCollection(line_coords, linewidths=0.1,
                                color = np.array([0, 0, 0, edge_alpha]))
 
         fig, ax = subplots()
