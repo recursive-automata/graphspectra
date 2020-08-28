@@ -68,6 +68,7 @@ def compute_laplacian(adjacency_matrix, normalize=False):
         degrees = count_out_degrees(adjacency_matrix)
         return diag(degrees) - adjacency_matrix
     else:
+        degrees = count_out_degrees(adjacency_matrix)
         n = degrees.shape[0]
         normalized = normalize_adjacency(adjacency_matrix, normalize)
         return identity(n) - normalized
